@@ -41,19 +41,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mUsageStatsManager = (UsageStatsManager) this.getSystemService(Context.USAGE_STATS_SERVICE);
         mUsageStatsList = getUsageStatistics(UsageStatsManager.INTERVAL_DAILY);
-        initButton();
-        initRecyclerView();
+        initViews();
 
     }
 
 
-    private void initButton() {
+    private void initViews() {
         mButton1 = (Button) findViewById(R.id.current_app_button);
         mButton1.setOnClickListener(this);
         mButton2 = (Button) findViewById(R.id.get_access);
         mButton2.setOnClickListener(this);
         mButton2.setVisibility(View.INVISIBLE);
-
+        initRecyclerView();
     }
 
 
@@ -138,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }).start();
     }
-
 
     @Override
     public void onClick(View view) {
