@@ -3,14 +3,13 @@ package com.example.waati.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.waati.Data.AllData;
 import com.example.waati.R;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,12 +33,13 @@ import java.util.ArrayList;
 
 public class PieChartActivity extends AppCompatActivity implements OnChartValueSelectedListener {
 
-
-    protected String[] mParties = new String[] {
-            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
-            "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
-            "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
-            "Party Y", "Party Z"
+    protected String[] mParties = new String[] {AllData.mAllInfoList.get(0).getAppInfo().getAppName(),
+            AllData.mAllInfoList.get(1).getAppInfo().getAppName(),
+            AllData.mAllInfoList.get(2).getAppInfo().getAppName(),
+            AllData.mAllInfoList.get(3).getAppInfo().getAppName(),
+            AllData.mAllInfoList.get(4).getAppInfo().getAppName(),
+            AllData.mAllInfoList.get(5).getAppInfo().getAppName(),
+//            AllData.mAllInfoList.get(6).getAppInfo().getAppName(),
     };
 
 
@@ -51,7 +51,6 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pie_chart);
-
 
 
         mChart = (PieChart) findViewById(R.id.chart1);
@@ -85,7 +84,7 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
         mChart.setOnChartValueSelectedListener(this);
 
         //几个分图 共多少
-        setData(4, 100);
+        setData(mParties.length, 100);
 
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         // mChart.spin(2000, 0, 360);
@@ -101,7 +100,7 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
         l.setYOffset(0f);
 
         // entry label styling
-        mChart.setEntryLabelColor(Color.WHITE);
+        mChart.setEntryLabelColor(Color.BLACK);
 //        mChart.setEntryLabelTypeface(mTfRegular);
         mChart.setEntryLabelTextSize(12f);
     }
@@ -182,12 +181,12 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         for (int i = 0; i < count ; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5),
-                    mParties[i % mParties.length],
+            entries.add(new PieEntry((float) (AllData.mAllInfoList.get(i).getSumTime()),
+                    mParties[i],
                     getResources().getDrawable(R.mipmap.ic_launcher))); //值 标语 图片
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+        PieDataSet dataSet = new PieDataSet(entries, " ");
 
         dataSet.setDrawIcons(false);
 
@@ -222,7 +221,7 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
 //        data.setValueTypeface(mTfLight);
         mChart.setData(data);
 
@@ -238,13 +237,13 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
      */
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
+        SpannableString s = new SpannableString("Your Time Spent On\nWHAT");
+        s.setSpan(new RelativeSizeSpan(1.0f), 0, 18, 0);
+//        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
+//        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
+//        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
+//        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), 19, s.length(), 0);
         return s;
     }
 

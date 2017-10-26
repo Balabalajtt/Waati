@@ -86,14 +86,6 @@ public class MyWindowManager {
         }
     }
 
-    public static void updateUsedPercent(Context context) {
-        if (smallWindow != null) {
-            TextView percentView = (TextView) smallWindow.findViewById(R.id.percent);
-//            percentView.setText(getUsedPercentValue(context));
-            percentView.setText("粑帅粑");
-        }
-    }
-
     public static boolean isWindowShowing() {
         return smallWindow != null || bigWindow != null;
     }

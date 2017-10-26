@@ -1,6 +1,8 @@
 package com.example.waati.View;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -70,6 +72,41 @@ public class FloatWindowSmallView extends LinearLayout {
                 // 如果手指离开屏幕时，xDownInScreen和xInScreen相等，且yDownInScreen和yInScreen相等，则视为触发了单击事件。
                 if (xDownInScreen == xInScreen && yDownInScreen == yInScreen) {
                     openBigWindow();
+                } else if (yInScreen > windowManager.getDefaultDisplay().getHeight() * 4 / 5) {
+                    final float startY = yInScreen;
+                    final float deltaY = yInScreen - windowManager.getDefaultDisplay().getHeight() * 1 / 50;
+                    final ValueAnimator animator = ValueAnimator.ofInt(0, 1).setDuration(200);
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float fraction = animator.getAnimatedFraction();
+                            yInScreen = startY - deltaY * fraction;
+                            Log.d("111", "onAnimationUpdate: " + 111);
+                            updateViewPosition();
+                        }
+                    });
+                    animator.start();
+                } else  {
+                    final float startX = xInScreen;
+                    final float deltaX;
+                    if (xInScreen > windowManager.getDefaultDisplay().getWidth() / 2) {
+                        deltaX = windowManager.getDefaultDisplay().getWidth() - startX;
+                    } else {
+                        deltaX = -startX;
+                    }
+                    final ValueAnimator animator = ValueAnimator.ofInt(0, 1).setDuration(200);
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float fraction = animator.getAnimatedFraction();
+                            xInScreen = startX + deltaX * fraction;
+                            Log.d("111", "onAnimationUpdate: " + 111);
+                            updateViewPosition();
+                        }
+                    });
+                    animator.start();
+//                    xInScreen = 0;
+//                    updateViewPosition();
                 }
                 break;
             default:

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.waati.Data.AllData;
 import com.example.waati.R;
 import com.example.waati.Adapter.UsageListAdapter;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mUsageStatsManager = (UsageStatsManager) this.getSystemService(Context.USAGE_STATS_SERVICE);
         mUsageStatsList = getUsageStatistics(UsageStatsManager.INTERVAL_DAILY);
+        AllData.setUsageStats(mUsageStatsList);
         initViews();
 
     }

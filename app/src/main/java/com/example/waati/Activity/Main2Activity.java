@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.example.waati.Adapter.AppInfoAdapter;
 import com.example.waati.Bean.AppInfo;
+import com.example.waati.Data.AllData;
 import com.example.waati.R;
 
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ public class Main2Activity extends AppCompatActivity {
             AppInfo appInfo = new AppInfo(appName, packageName,drawable);
             mAppInfoList.add(appInfo);
         }
+        AllData.setAppInfoList(mAppInfoList);
+        AllData.combineToAll();
         return mAppInfoList;
     }
 
