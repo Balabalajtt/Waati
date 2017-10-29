@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/big_window_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@mipmap/ic_launcher"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/pppig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/pppig"/>
 
     <Button
         android:id="@+id/close"
@@ -13,7 +18,9 @@
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
         android:text="关闭"
-        android:textSize="10sp"/>
+        android:textSize="10sp"
+        android:layout_below="@+id/back"
+        android:layout_toEndOf="@+id/pppig"/>
 
     <Button
         android:id="@+id/back"
@@ -21,6 +28,8 @@
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
         android:text="返回"
-        android:textSize="10sp"/>
+        android:textSize="10sp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/pppig"/>
 
-</LinearLayout>
+</RelativeLayout>

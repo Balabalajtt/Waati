@@ -18,6 +18,7 @@ public class StartActivity extends AppCompatActivity {
         Button button2 = (Button) findViewById(R.id.main_2);
         Button button3 = (Button) findViewById(R.id.main_3);
         Button button4 = (Button) findViewById(R.id.main_4);
+        Button button5 = (Button) findViewById(R.id.main_5);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +41,13 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(StartActivity.this, PieChartActivity.class));
+            }
+        });
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StartActivity.this, Main4Activity.class));
             }
         });
     }

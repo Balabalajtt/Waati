@@ -8,7 +8,6 @@ import com.example.waati.R;
 
 import android.graphics.Color;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.Menu;
@@ -40,6 +39,7 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
             AllData.mAllInfoList.get(4).getAppInfo().getAppName(),
             AllData.mAllInfoList.get(5).getAppInfo().getAppName(),
 //            AllData.mAllInfoList.get(6).getAppInfo().getAppName(),
+            "其他"
     };
 
 
@@ -51,8 +51,10 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pie_chart);
+        initChart();
+    }
 
-
+    private void initChart() {
         mChart = (PieChart) findViewById(R.id.chart1);
         mChart.setUsePercentValues(true);
         mChart.getDescription().setEnabled(false);//右下角描述
@@ -180,11 +182,18 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
 
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        for (int i = 0; i < count ; i++) {
+        for (int i = 0; i < count - 1 ; i++) {
             entries.add(new PieEntry((float) (AllData.mAllInfoList.get(i).getSumTime()),
                     mParties[i],
                     getResources().getDrawable(R.mipmap.ic_launcher))); //值 标语 图片
         }
+        long time = 0;
+        for (int i = count - 2; i < AllData.mAllInfoList.size(); i++) {
+            time += AllData.mAllInfoList.get(i).getSumTime();
+        }
+        entries.add(new PieEntry((float) time,
+                mParties[count - 1],
+                getResources().getDrawable(R.mipmap.ic_launcher)));
 
         PieDataSet dataSet = new PieDataSet(entries, " ");
 
@@ -239,11 +248,12 @@ public class PieChartActivity extends AppCompatActivity implements OnChartValueS
 
         SpannableString s = new SpannableString("Your Time Spent On\nWHAT");
         s.setSpan(new RelativeSizeSpan(1.0f), 0, 18, 0);
-//        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
+        s.setSpan(new RelativeSizeSpan(1.5f), 5, 10, 0);
+        s.setSpan(new RelativeSizeSpan(1.7f), 19, s.length(), 0);
 //        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
 //        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
 //        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), 19, s.length(), 0);
+//        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), 19, s.length(), 0);
         return s;
     }
 
