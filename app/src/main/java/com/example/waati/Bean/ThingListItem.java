@@ -19,7 +19,6 @@ public class ThingListItem extends DataSupport{
     private String mContent;
     private int mUrgentType = 0;//0 1 2 --->重要
     private int mDoStatus = 0;//0待办 1已办
-    private int mEditStatus = 0;//0未编辑 1正在编辑
 
     //事情构造
     public ThingListItem(Date mDate, String mContent, int mUrgentType) {
@@ -27,7 +26,6 @@ public class ThingListItem extends DataSupport{
         this.mContent = mContent;
         this.mUrgentType = mUrgentType;
         this.mDoStatus = 0;
-        this.mEditStatus = 0;
         this.mListType = 1;
     }
 
@@ -85,11 +83,4 @@ public class ThingListItem extends DataSupport{
         this.mDoStatus = mDoStatus;
     }
 
-    public int getmEditStatus() {
-        return mEditStatus;
-    }
-
-    public void setmEditStatus(int mEditStatus) {
-        this.mEditStatus = mEditStatus;
-    }
 }

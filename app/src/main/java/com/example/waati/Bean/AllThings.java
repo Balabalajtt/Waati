@@ -1,7 +1,5 @@
 package com.example.waati.Bean;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +12,12 @@ public class AllThings {
 
     public static List<ThingListItem> sThingList = new ArrayList<>();
     public static List<Date> sDateList = new ArrayList<>();
-    private static final String TAG = "AllThings";
 
     public static void addThing(ThingListItem thingListItem) {
-        Log.d(TAG, "addThing: " + "来了几次");
+        thingListItem.save();
         Date date = thingListItem.getmDate();
         if (con(date)) {//有同日期的其他事情存在
             int j = 0;
-            Log.d(TAG, "addThing: " + "有");
             for(int i = 0; i < sThingList.size(); i++) {
                 if (sThingList.get(i).getmListType() == 0
                         && date.getDate() == sThingList.get(i).getmDate().getDate()) {
@@ -52,7 +48,6 @@ public class AllThings {
                 if (i == sDateList.size()) {
                     sDateList.add(date);
                 }
-                Log.d(TAG, "addThing: " + "111");
             }
 
             if(sThingList.isEmpty()) {
@@ -80,7 +75,7 @@ public class AllThings {
         if (position >= sThingList.size() || position <= 0) {
             return;
         }
-
+        sThingList.get(position).delete();
         if (position == sThingList.size() - 1) {//最后一条事情
             if (sThingList.get(position - 1).getmListType() == 0) {
                 sDateList.remove(sThingList.get(position - 1).getmDate());

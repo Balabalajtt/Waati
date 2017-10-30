@@ -2,22 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="20dp">
 
-    <EditText
-        android:id="@+id/input_date"
-        android:hint="2017/10/29"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="date"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/input_time"
-        android:hint="18:00"
+        <EditText
+            android:id="@+id/input_date_year"
+            android:hint="2017"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+        <EditText
+            android:id="@+id/input_date_month"
+            android:hint="10"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+        <EditText
+            android:id="@+id/input_date_day"
+            android:hint="29"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="time"/>
+        android:layout_height="wrap_content">
 
+        <EditText
+            android:id="@+id/input_time_hour"
+            android:hint="18"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="time"/>
+
+        <EditText
+            android:id="@+id/input_time_minute"
+            android:hint="20"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+
+    </LinearLayout>
     <EditText
         android:id="@+id/input_content"
         android:hint="和皮皮猪一起吃饭"
